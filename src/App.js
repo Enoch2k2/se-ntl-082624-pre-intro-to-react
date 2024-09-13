@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import BlogForm from './components/BlogForm';
+import BlogList from './components/BlogList';
+import Header from './components/Header'
 
 function App() {
+  const [blogs, setBlogs] = useState([
+    {
+      title: "Blog Title 1",
+      content: "This is a blog about dogs."
+    },
+    {
+      title: "Blog Title 2",
+      content: "A blog about cats."
+    },
+    {
+      title: "Blog Title 3",
+      content: "This is a blog about komodo dragons."
+    }
+  ])
+
+  function addBlog(blog) {
+    setBlogs([...blogs, blog])
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <BlogForm addBlog={addBlog} />
+      <BlogList blogs={blogs} />
     </div>
   );
 }
